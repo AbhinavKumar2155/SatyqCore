@@ -193,14 +193,14 @@ export const Login: React.FC<LoginProps> = ({ onLogin, theme }) => {
            <div className="relative w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden border border-slate-200 dark:border-slate-700 group-hover:border-cyan-400 transition-colors shrink-0">
                <img 
                  src="https://media.licdn.com/dms/image/v2/D5603AQEgsBwL21VRlw/profile-displayphoto-scale_400_400/B56ZgJOw0_HYAk-/0/1752501523203?e=1772064000&v=beta&t=a92AmGRzscSEdNHt0elDQSMe0t5MOenQ-r1Ptw5JKZ8" 
-                 alt="Ankan Ghosh"
+                 alt="Abhinav Singh"
                  className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500" 
                />
            </div>
            <div className="flex flex-col">
               <span className="text-[9px] md:text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">System Architect</span>
               <div className="flex items-center gap-1">
-                 <span className="text-xs md:text-sm font-bold text-slate-700 dark:text-slate-200 group-hover:text-slate-900 dark:group-hover:text-white">Ankan Ghosh</span>
+                 <span className="text-xs md:text-sm font-bold text-slate-700 dark:text-slate-200 group-hover:text-slate-900 dark:group-hover:text-white">Abhinav Singh</span>
                  <ExternalLink className="w-3 h-3 text-slate-400 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
               </div>
            </div>
