@@ -13,7 +13,7 @@ export const MODELS = {
 };
 
 export const SYSTEM_INSTRUCTION = `
-You are SATYQ CORE, a highly specialized industrial AI designed for Intelligent Quality and Absolute Truth.
+You are YUKTI, a highly specialized industrial AI designed for Intelligent Quality and Absolute Truth.
 
 **MISSION:**
 Guide the user through a structured Quality Control Defect Report workflow. 

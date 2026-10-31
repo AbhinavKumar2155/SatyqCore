@@ -66,7 +66,7 @@ export const Login: React.FC<LoginProps> = ({ onLogin, theme }) => {
     if (mediaQuery.matches) return;
 
     // Matrix Config
-    const characters = 'SATYQ CORE 0101010101 INTELLIGENCE ΩΣΠΔΛ';
+    const characters = 'YUKTI 0101010101 INTELLIGENCE ΩΣΠΔΛ';
     const fontSize = 14;
     let drops: number[] = [];
 
@@ -150,7 +150,7 @@ export const Login: React.FC<LoginProps> = ({ onLogin, theme }) => {
          <div className="max-w-2xl w-full mx-auto space-y-2">
             <div className="flex items-center gap-4 mb-8 opacity-50">
                <Hexagon className="w-8 h-8 animate-spin" />
-               <span className="text-xl tracking-widest font-bold">SATYQ BIOS v4.2</span>
+               <span className="text-xl tracking-widest font-bold">YUKTI BIOS v4.2</span>
             </div>
             {bootLines.map((line, i) => (
               <div key={i} className="flex items-center gap-3">
@@ -333,7 +333,7 @@ export const Login: React.FC<LoginProps> = ({ onLogin, theme }) => {
                 {/* Column 1: Brand & Bio */}
                 <div className="space-y-6">
                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-1">
-                     Satyq<span className="text-emerald-500">.Core</span>
+                     Yukti
                    </h2>
                    <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed max-w-sm">
                      Intelligent Quality. Absolute Truth. An enterprise-grade AI platform transforming complex telemetry into actionable insights through Deep Reasoning and Computer Vision.
@@ -359,15 +359,15 @@ export const Login: React.FC<LoginProps> = ({ onLogin, theme }) => {
                   <p className="text-slate-600 dark:text-slate-400 text-sm mb-6 leading-relaxed">
                     Feel free to reach out for collaborations or just a friendly hello.
                   </p>
-                  <a href="mailto:info.satyq.core@gmail.com" className="text-emerald-600 dark:text-emerald-400 font-mono text-sm hover:underline hover:text-emerald-500 dark:hover:text-emerald-300 mb-8 block transition-colors">
-                     info.satyq.core@gmail.com ↗
+                  <a href="mailto:ghoshankan005@gmail.com" className="text-emerald-600 dark:text-emerald-400 font-mono text-sm hover:underline hover:text-emerald-500 dark:hover:text-emerald-300 mb-8 block transition-colors">
+                     ghoshankan005@gmail.com ↗
                   </a>
                 </div>
              </div>
              
              {/* Copyright Bar */}
              <div className="max-w-7xl mx-auto pt-8 border-t border-slate-200 dark:border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500 dark:text-slate-600 font-mono">
-                <p>&copy; 2026 Satyq Core. All rights reserved.</p>
+                <p>&copy; 2026 Yukti. All rights reserved.</p>
                 <div className="flex items-center gap-6">
                    <span className="hover:text-slate-800 dark:hover:text-slate-400 transition-colors cursor-pointer">Privacy Policy</span>
                    <span className="flex items-center gap-2 text-emerald-700 dark:text-emerald-500/80 bg-emerald-100 dark:bg-emerald-950/20 px-2 py-1 rounded border border-emerald-200 dark:border-emerald-900/30">
