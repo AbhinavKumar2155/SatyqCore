@@ -28,7 +28,7 @@ export const TourGuide: React.FC<TourGuideProps> = ({ onComplete }) => {
   const STEPS: TourStep[] = [
     {
       title: 'SYSTEM ORIENTATION',
-      content: 'Welcome to SATYQ CORE. Would you like to initiate the calibration sequence to familiarize yourself with the operational interface?',
+      content: 'Welcome to YUKTI. Would you like to initiate the calibration sequence to familiarize yourself with the operational interface?',
       position: 'inset-0 flex items-center justify-center',
       align: 'center'
     },
@@ -120,7 +120,7 @@ export const TourGuide: React.FC<TourGuideProps> = ({ onComplete }) => {
                     </div>
                 </div>
                 <div className="bg-black/50 p-2 text-center border-t border-slate-800">
-                    <span className="text-[10px] text-slate-600 font-mono">SATYQ CORE v4.2 // INITIALIZATION</span>
+                    <span className="text-[10px] text-slate-600 font-mono">YUKTI v4.2 // INITIALIZATION</span>
                 </div>
             </div>
         </div>

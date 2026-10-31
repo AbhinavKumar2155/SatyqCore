@@ -33,7 +33,7 @@ export const Logo: React.FC<LogoProps> = ({
         <div className={`relative ${s.h} ${s.w} shrink-0 rounded-full overflow-hidden border border-cyan-500/30 shadow-[0_0_15px_rgba(6,182,212,0.3)] group`}>
           <img 
             src="https://static.vecteezy.com/system/resources/previews/065/460/254/non_2x/robot-head-with-a-friendly-smile-vector.jpg" 
-            alt="SATYQ Logo" 
+            alt="Yukti Logo"
             className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
           />
           {/* Optional Overlay/Glow effect */}
@@ -44,8 +44,7 @@ export const Logo: React.FC<LogoProps> = ({
         {mode === 'full' && (
           <div className="flex flex-col justify-center">
             <h1 className={`${s.text} font-sans tracking-wide leading-none text-slate-100`}>
-              <span className="font-extrabold tracking-wider">SATYQ</span>
-              <span className="font-light text-cyan-400 ml-1.5 opacity-90 tracking-widest">CORE</span>
+              <span className="font-extrabold tracking-wider">YUKTI</span>
             </h1>
           </div>
         )}

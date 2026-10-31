@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=32&duration=3000&pause=600&color=00FFD1&center=true&vCenter=true&width=900&lines=SATYQ+CORE;Industrial+AI+Interface;Intelligent+Quality.+Absolute+Truth.;Visual+Recon+%7C+Telemetry+%7C+Deep+Reasoning" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=32&duration=3000&pause=600&color=00FFD1&center=true&vCenter=true&width=900&lines=YUKTI;Industrial+AI+Interface;Intelligent+Quality.+Absolute+Truth.;Visual+Recon+%7C+Telemetry+%7C+Deep+Reasoning" />
 </p>
 
 <p align="center">
@@ -8,7 +8,7 @@
 
 <div align="center">
 
-# ⚡ SATYQ CORE  
+# ⚡ YUKTI
 ### Industrial AI Interface for Intelligent Quality Control  
 
 **Intelligent Quality. Absolute Truth.**
@@ -31,7 +31,7 @@
 
 ---
 
-SATYQ CORE is an enterprise-grade Industrial AI interface for:
+YUKTI is an enterprise-grade Industrial AI interface for:
 
 ✅ High-precision Quality Control  
 ✅ Telemetry & Log Intelligence  

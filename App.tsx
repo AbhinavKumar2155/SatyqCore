@@ -9,7 +9,7 @@ const MODE_CONFIG = {
   [AppMode.STANDARD]: {
     title: 'Ops Dashboard',
     color: 'cyan',
-    modelName: 'SATYQ-CORE',
+    modelName: 'YUKTI',
     desc: 'Standard operating procedure environment for routine defect reporting, shift logging, and general inquiries.',
     output: 'Concise Markdown reports, standard status indicators (Nominal/Critical), and simple trend visualization.',
     placeholder: 'Enter defect log or operational command...',
@@ -22,7 +22,7 @@ const MODE_CONFIG = {
   [AppMode.DEEP_REASON]: {
     title: 'Deep Logic Engine',
     color: 'violet',
-    modelName: 'SATYQ-CORE',
+    modelName: 'YUKTI',
     desc: 'Advanced reasoning environment using "Thinking Tokens" to perform Root Cause Analysis (5 Whys) and complex deduction.',
     output: 'Detailed logic traces, step-by-step reasoning chains, and comprehensive failure analysis.',
     placeholder: 'Input complex failure scenario for analysis...',
@@ -35,7 +35,7 @@ const MODE_CONFIG = {
   [AppMode.DATA_ANALYSIS]: {
     title: 'Telemetry Lab',
     color: 'fuchsia',
-    modelName: 'SATYQ-CORE',
+    modelName: 'YUKTI',
     desc: 'Dedicated environment for processing raw telemetry data into visual models and statistical insights.',
     output: 'Strictly structured JSON for chart rendering, minimal conversational text, and statistical summaries.',
     placeholder: 'Input raw JSON, CSV, or sensor data for rendering...',
@@ -48,7 +48,7 @@ const MODE_CONFIG = {
   [AppMode.RESEARCH]: {
     title: 'Global Intel',
     color: 'emerald',
-    modelName: 'SATYQ-CORE',
+    modelName: 'YUKTI',
     desc: 'Connected environment for retrieving real-time ISO standards, regulatory compliance, and industrial news.',
     output: 'Fact-checked summaries with citation links, source verification, and external web references.',
     placeholder: 'Search for regulations or standards...',
@@ -61,7 +61,7 @@ const MODE_CONFIG = {
   [AppMode.MARKET_VALUATION]: {
     title: 'Asset Valuation',
     color: 'lime',
-    modelName: 'SATYQ-CORE',
+    modelName: 'YUKTI',
     desc: 'Financial intelligence module for estimating industrial asset value, resale potential, and scrap rates based on regional markets.',
     output: 'Estimated market value range, currency conversion, and recommended sales channels.',
     placeholder: 'Describe asset or upload image for valuation...',
@@ -74,7 +74,7 @@ const MODE_CONFIG = {
   [AppMode.IMAGE_EDIT]: {
     title: 'Visual Recon',
     color: 'amber',
-    modelName: 'SATYQ-CORE',
+    modelName: 'YUKTI',
     desc: 'Multimodal analysis environment for visual defect inspection, severity grading, and surface anomaly detection.',
     output: 'Technical visual assessments, severity ratings (1-10), and repair recommendations based on visual data.',
     placeholder: 'Upload image and describe inspection criteria...',
@@ -87,7 +87,7 @@ const MODE_CONFIG = {
 };
 
 const SESSION_STORAGE_KEY = 'apex9_chat_sessions';
-const TOUR_STORAGE_KEY = 'satyq_core_tour_completed';
+const TOUR_STORAGE_KEY = 'yukti_tour_completed';
 
 const COUNTRY_OPTIONS = [
     { code: 'USA', label: 'United States', currency: 'USD' },
@@ -970,7 +970,7 @@ export default function App() {
            {/* Footer */}
            <div className="mt-2 md:mt-4 flex flex-col md:flex-row items-center justify-between gap-2 md:gap-3 text-[9px] md:text-[10px] font-mono text-slate-500 dark:text-slate-600">
                <div className="order-2 md:order-1 flex items-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
-                   <span>© 2026 Satyq Core. All rights reserved.</span>
+                   <span>© 2026 Yukti. All rights reserved.</span>
                </div>
                <div className="order-1 md:order-2 flex flex-wrap justify-center items-center gap-3 md:gap-4 w-full md:w-auto pb-1 md:pb-0 border-b border-slate-200 dark:border-slate-800 md:border-none">
                     <button className="hover:text-slate-800 dark:hover:text-slate-400 transition-colors uppercase whitespace-nowrap">Privacy Protocol</button>
