@@ -1,4 +1,5 @@
 import { AppMode, ChartConfig, GroundingSource, Message } from '../types';
+import { SYSTEM_INSTRUCTION } from '../constants';
 
 interface GenerateParams {
   prompt: string;
@@ -17,11 +18,49 @@ interface ServiceResponse {
 
 function buildPuterOptions(params: GenerateParams) {
   const { mode, country, currency } = params;
+  let modeInstruction = '';
+
+  if (mode === AppMode.DATA_ANALYSIS) {
+    modeInstruction = `
+You are in DATA ANALYSIS mode. Return ONLY one valid JSON object matching this schema:
+{"visualize":true,"chartType":"line|bar|area|pie|radar","title":"string","xAxisKey":"label","dataKey":"value","color":"#06b6d4","data":[{"label":"string","value":0}]}
+Do not include Markdown, explanations, headings, or code fences. Every data item must contain a string label and numeric value.
+`;
+  } else if (mode === AppMode.MARKET_VALUATION) {
+    modeInstruction = `
+You are in MARKET VALUATION mode for ${country || 'United States'} using ${currency || 'USD'}.
+Always answer using this exact Markdown structure:
+## Valuation Summary
+- Asset:
+- Location:
+- Currency:
+
+## Estimated Values
+| Measure | Value |
+|---|---:|
+| Fair Market Value | |
+| Liquidation Value | |
+| Scrap Value | |
+
+## Assumptions
+- [state assumptions here]
+
+## Recommendation
+
+If essential specifications are missing, keep the same headings and put "Insufficient information" in the affected sections, followed by a numbered list of the exact details required. Never invent precise prices or use another currency.
+`;
+  } else {
+    modeInstruction = `
+Use structured Markdown for every response: a short ## Summary, then relevant ## Findings, ## Evidence or ## Assumptions, and ## Recommendation sections. Use bullets or tables instead of long unbroken prose.
+`;
+  }
+
   const options: any = {
     model: 'gemini-3-flash-preview',
-    temperature: 0.2
+    temperature: 0.2,
+    system: `${SYSTEM_INSTRUCTION}\n\n${modeInstruction}`
   };
-  options.system = `MODE:${AppMode[mode] || 'STANDARD'}; Country:${country || 'United States'}; Currency:${currency || 'USD'}`;
+  options.system += `\nMODE:${AppMode[mode] || 'STANDARD'}; Country:${country || 'United States'}; Currency:${currency || 'USD'}`;
   return options;
 }
 
@@ -45,17 +84,87 @@ export const generateResponse = async ({ prompt, history, imageBase64, mode, cou
     response = await (window as any).puter.ai.chat(fullPrompt, options);
   }
 
-  if (typeof response === 'string') return { text: response };
-  if (response && response.text) {
-    return {
-      text: response.text,
-      chartConfig: response.chartConfig,
-      groundingSources: response.groundingSources
-    };
+  const text = extractResponseText(response);
+  const parsed = extractChartConfig(text);
+
+  return {
+    text: parsed.text,
+    chartConfig: parsed.chartConfig,
+    groundingSources: response?.groundingSources
+  };
+};
+
+function extractResponseText(response: any): string {
+  let current = response;
+
+  // Puter may return the provider envelope either as an object or as a
+  // JSON-encoded string. Unwrap those layers before rendering assistant text.
+  for (let depth = 0; depth < 3; depth += 1) {
+    if (typeof current === 'string') {
+      try {
+        const parsed = JSON.parse(current);
+        if (parsed && typeof parsed === 'object') {
+          current = parsed;
+          continue;
+        }
+      } catch {
+        return current;
+      }
+      return current;
+    }
+
+    if (Array.isArray(current)) {
+      current = current[0];
+      continue;
+    }
+
+    if (typeof current?.message?.content === 'string') {
+      return current.message.content;
+    }
+
+    if (Array.isArray(current?.message?.content)) {
+      return current.message.content
+        .map((part: any) => typeof part === 'string' ? part : part?.text || '')
+        .join('');
+    }
+
+    if (typeof current?.text === 'string') {
+      return current.text;
+    }
+
+    if (current?.message) {
+      current = current.message;
+      continue;
+    }
+
+    break;
   }
 
-  return { text: JSON.stringify(response) };
-};
+  return typeof current === 'string' ? current : JSON.stringify(current);
+}
+
+function extractChartConfig(text: string): { text: string; chartConfig?: ChartConfig } {
+  const candidates = [
+    text.match(/```(?:json)?\s*([\s\S]*?)\s*```/)?.[1],
+    text.slice(text.indexOf('{'), text.lastIndexOf('}') + 1)
+  ].filter((candidate): candidate is string => Boolean(candidate));
+
+  for (const candidate of candidates) {
+    try {
+      const parsed = JSON.parse(candidate);
+      if (parsed?.visualize === true && Array.isArray(parsed.data)) {
+        return {
+          text: text.replace(candidate, '').replace(/```(?:json)?|```/g, '').trim(),
+          chartConfig: parsed as ChartConfig
+        };
+      }
+    } catch {
+      // The response is ordinary Markdown rather than chart JSON.
+    }
+  }
+
+  return { text };
+}
 
 export async function* streamResponseParts(params: GenerateParams): AsyncGenerator<any, void, unknown> {
   if (!(window as any).puter || !(window as any).puter.ai) {
