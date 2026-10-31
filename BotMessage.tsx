@@ -158,27 +158,29 @@ export const BotMessage: React.FC<BotMessageProps> = ({ message, hasImageContext
 
   const formatText = (text: string) => {
     return text.split('\n').map((line, idx) => {
-      if (line.startsWith('## ')) {
-        return <h3 key={idx} className="text-base md:text-lg font-bold text-sky-600 dark:text-sky-400 mt-6 mb-3 font-mono uppercase tracking-wider border-b border-slate-200 dark:border-slate-800 pb-1">{line.replace('## ', '')}</h3>;
+      const normalizedLine = line.trimStart();
+
+      if (normalizedLine.startsWith('## ')) {
+        return <h3 key={idx} className="text-base md:text-lg font-bold text-sky-600 dark:text-sky-400 mt-6 mb-3 font-mono uppercase tracking-wider border-b border-slate-200 dark:border-slate-800 pb-1">{normalizedLine.replace('## ', '')}</h3>;
       }
-      if (line.startsWith('### ')) {
-        return <h4 key={idx} className="text-sm font-bold text-slate-700 dark:text-slate-200 mt-4 mb-2 font-mono">{line.replace('### ', '')}</h4>;
+      if (normalizedLine.startsWith('### ')) {
+        return <h4 key={idx} className="text-sm font-bold text-slate-700 dark:text-slate-200 mt-4 mb-2 font-mono">{normalizedLine.replace('### ', '')}</h4>;
       }
-      const parts = line.split(/(\*\*.*?\*\*)/g);
+      const parts = line.split(/(\*\*[^*\n]+\*\*)/g);
       const formattedLine = parts.map((part, i) => {
         if (part.startsWith('**') && part.endsWith('**')) {
           return <strong key={i} className="text-slate-900 dark:text-white font-semibold">{part.slice(2, -2)}</strong>;
         }
-        return part;
+        return part.replace(/\*\*/g, '');
       });
 
-      if (line.trim().startsWith('- ')) {
+      if (normalizedLine.startsWith('- ')) {
         return <li key={idx} className="ml-4 text-slate-600 dark:text-slate-300 pl-2 mb-1 border-l-2 border-slate-300 dark:border-slate-700">{formattedLine}</li>;
       }
-      if (line.trim().match(/^\d+\. /)) {
+      if (normalizedLine.match(/^\d+\. /)) {
         return <div key={idx} className="ml-4 text-slate-600 dark:text-slate-300 mb-2 font-mono text-sm">
-            <span className="text-sky-500 mr-2">[{line.split('.')[0]}]</span>
-            <span>{line.replace(/^\d+\. /, '')}</span>
+            <span className="text-sky-500 mr-2">[{normalizedLine.split('.')[0]}]</span>
+            <span>{normalizedLine.replace(/^\d+\. /, '')}</span>
         </div>;
       }
 
