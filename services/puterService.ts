@@ -95,15 +95,52 @@ export const generateResponse = async ({ prompt, history, imageBase64, mode, cou
 };
 
 function extractResponseText(response: any): string {
-  if (typeof response === 'string') return response;
-  if (typeof response?.message?.content === 'string') return response.message.content;
-  if (typeof response?.text === 'string') return response.text;
-  if (Array.isArray(response?.message?.content)) {
-    return response.message.content
-      .map((part: any) => typeof part === 'string' ? part : part?.text || '')
-      .join('');
+  let current = response;
+
+  // Puter may return the provider envelope either as an object or as a
+  // JSON-encoded string. Unwrap those layers before rendering assistant text.
+  for (let depth = 0; depth < 3; depth += 1) {
+    if (typeof current === 'string') {
+      try {
+        const parsed = JSON.parse(current);
+        if (parsed && typeof parsed === 'object') {
+          current = parsed;
+          continue;
+        }
+      } catch {
+        return current;
+      }
+      return current;
+    }
+
+    if (Array.isArray(current)) {
+      current = current[0];
+      continue;
+    }
+
+    if (typeof current?.message?.content === 'string') {
+      return current.message.content;
+    }
+
+    if (Array.isArray(current?.message?.content)) {
+      return current.message.content
+        .map((part: any) => typeof part === 'string' ? part : part?.text || '')
+        .join('');
+    }
+
+    if (typeof current?.text === 'string') {
+      return current.text;
+    }
+
+    if (current?.message) {
+      current = current.message;
+      continue;
+    }
+
+    break;
   }
-  return JSON.stringify(response);
+
+  return typeof current === 'string' ? current : JSON.stringify(current);
 }
 
 function extractChartConfig(text: string): { text: string; chartConfig?: ChartConfig } {
